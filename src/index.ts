@@ -172,4 +172,50 @@ const buy = async (newWallet: Keypair, baseMint: PublicKey, buyAmount: number) =
   }
 }
 
+const sell = async (baseMint: PublicKey, wallet: Keypair) => {
+  try {
+    const data: Data[] = readJson()
+    if (data.length == 0) {
+      await sleep(1000)
+      return null
+    }
+
+    const tokenAta = await getAssociatedTokenAddress(baseMint, wallet.publicKey)
+    const tokenBalInfo = await solanaConnection.getTokenAccountBalance(tokenAta)
+    if (!tokenBalInfo) {
+      console.log("Balance incorrect")
+      return null
+    }
+    const tokenBalance = tokenBalInfo.value.amount
+
+    try {
+      let sellTx = await getSellTxWithJupiter(wallet, baseMint, tokenBalance)
+
+      if (sellTx == null) {
+        console.log(`Error getting buy transaction`)
+        return null
+      }
+      // console.log(await solanaConnection.simulateTransaction(sellTx))
+      let txSig
+      if (JITO_MODE) {
+        txSig = await executeJitoTx([sellTx], mainKp, jitoCommitment)
+      } else {
+        const latestBlockhash = await solanaConnection.getLatestBlockhash()
+        txSig = await execute(sellTx, latestBlockhash, 1)
+      }
+      if (txSig) {
+        const tokenSellTx = txSig ? `https://solscan.io/tx/${txSig}` : ''
+        console.log("Success in sell transaction: ", tokenSellTx)
+        return tokenSellTx
+      } else {
+        return null
+      }
+    } catch (error) {
+      return null
+    }
+  } catch (error) {
+    return null
+  }
+}
+
 main()
