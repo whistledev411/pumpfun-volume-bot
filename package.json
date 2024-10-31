@@ -6,7 +6,7 @@
   },
   "scripts": {
     "tsc": "tsc --noEmit",
-    "start": "ts-node .src/index.ts"
+    "start": "ts-node ./src/index.ts"
   },
   "dependencies": {
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
