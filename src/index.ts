@@ -64,7 +64,6 @@ export const solanaConnection = new Connection(RPC_ENDPOINT, {
 
 const mainKp = Keypair.fromSecretKey(base58.decode(PRIVATE_KEY))
 const baseMint = new PublicKey(TOKEN_MINT)
-const distritbutionNum = DISTRIBUTE_WALLET_NUM > 20 ? 20 : DISTRIBUTE_WALLET_NUM
 const jitoCommitment: Commitment = "confirmed"
 
 export const BONDING_CURV = struct([
@@ -152,29 +151,6 @@ const main = async (mainKp: Keypair, baseMint: PublicKey, distritbutionNum: numb
       console.log("first buy done")
 
       await sleep(BUY_WAIT_INTERVAL * 1000)
-
-      let l = 0
-      while (true) {
-        try {
-          if (l > 10) {
-            console.log("Error in buy transaction")
-            throw new Error("Error in buy transaction")
-          }
-          console.log('second buy start')
-          const poolState = await getPoolState(baseMint, solanaConnection);
-          if(!poolState?.virtualSolReserves || !poolState.virtualTokenReserves) return
-          const result = await buy(srcKp, baseMint, buyAmountSecond, undefined, solanaConnection, poolState?.virtualSolReserves, poolState?.virtualTokenReserves)
-          if (result) {
-            break
-          } else {
-            l++
-            await sleep(2000)
-          }
-        } catch (error) {
-          l++
-          console.log('second buy error => ', error)
-        }
-      }
 
       await sleep(BUY_WAIT_INTERVAL * 1000)
 
