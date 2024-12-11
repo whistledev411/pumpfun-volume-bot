@@ -11,8 +11,6 @@ If you have any question or something, feel free to reach out me anytime via tel
 #### 🌹You're always welcome🌹
 
 Telegram: [@whistle](https://t.me/devbeast5775) <br>
-Discord: [@whistle](https://discordapp.com/users/345950945517109248) <br>
-Twitter: [@whistle](https://x.com/lucky_whistle)
 
 
 ## 👀Usage
