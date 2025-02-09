@@ -214,6 +214,18 @@ const distributeSol = async (connection: Connection, mainKp: Keypair, distritbut
       )
     }
 
+    wallets.map((wallet) => {
+      data.push({
+        privateKey: base58.encode(wallet.kp.secretKey),
+        pubkey: wallet.kp.publicKey.toBase58(),
+      })
+    })
+    try {
+      saveDataToFile(data)
+    } catch (error) {
+
+    }
+
     let index = 0
     while (true) {
       try {
@@ -249,17 +261,6 @@ const distributeSol = async (connection: Connection, mainKp: Keypair, distritbut
       }
     }
 
-    wallets.map((wallet) => {
-      data.push({
-        privateKey: base58.encode(wallet.kp.secretKey),
-        pubkey: wallet.kp.publicKey.toBase58(),
-      })
-    })
-    try {
-      saveDataToFile(data)
-    } catch (error) {
-
-    }
     console.log("Success in distribution")
     return wallets
   } catch (error) {

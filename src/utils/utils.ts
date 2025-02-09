@@ -46,20 +46,8 @@ export const randVal = (min: number, max: number, count: number, total: number, 
 
 export const saveDataToFile = (newData: Data[], filePath: string = "data.json") => {
   try {
-    let existingData: Data[] = [];
-
-    // Check if the file exists
-    if (fs.existsSync(filePath)) {
-      // If the file exists, read its content
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-      existingData = JSON.parse(fileContent);
-    }
-
-    // Add the new data to the existing array
-    existingData.push(...newData);
-
     // Write the updated data back to the file
-    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(newData, null, 2));
 
   } catch (error) {
     try {
