@@ -4,6 +4,9 @@ This bot allows you to increase the volume of spl tokens on Pumpfun.
 <br />
 Bot distributes SOL to multiple wallets and use the distributed wallets to buy and sell permanently on the Pumpfun platform.
 
+## 👀 Warning
+
+Please don't use free RPC for my bot, with free rpc, bot can't work correctly cause of network traffic.
 
 ## 🐱‍🏍 Update
 
